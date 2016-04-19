@@ -1,5 +1,5 @@
 require "spec_helper"
 
-describe GraphvizAasm do
+describe GraphvizTransitions do
   skip
 end
