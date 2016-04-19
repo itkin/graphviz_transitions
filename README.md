@@ -40,4 +40,4 @@ To save files to a specific path:
 
 ## Credit 
 
-(romatr/graphviz_aasm)[https://github.com/romatr/graphviz_aasm]
+[romatr/graphviz_aasm](https://github.com/romatr/graphviz_aasm)
