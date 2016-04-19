@@ -1,4 +1,4 @@
-# GraphvizAasm
+# GraphvizTransitions
 
 Adds support for generating graphs based on states, events and transitions defined for [Transitions](https://github.com/troessner/transitions) state machine using
 [GraphViz](http://www.graphviz.org) and [Ruby-GraphViz](https://github.com/glejeune/Ruby-Graphviz).
