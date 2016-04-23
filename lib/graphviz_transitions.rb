@@ -51,7 +51,7 @@ module Transitions
   Transitions::Event.class_eval do
     def draw(graph)
       @transitions.each do |transition|
-        graph.add_edge(transition.from.to_s.humanize, transition.to.to_s.humanize, label: name.to_s)
+        graph.add_edge(transition.from.to_s.humanize, transition.to.to_s.humanize, label: " #{name.to_s.humanize} ")
       end
     end
   end
