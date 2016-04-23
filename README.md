@@ -26,7 +26,7 @@ To generate a graph for a specific model:
 
 To save files to a specific path:
 
-    $ rake aasm:draw CLASS=Vehicle,Vehicle::Color TARGET=./tmp
+    $ rake transitions:draw CLASS=Vehicle,Vehicle::Color TARGET=./tmp
 
 
 ## Contributing
