@@ -9,6 +9,8 @@ module Transitions
     def self.draw(class_names, options = {})
       raise ArgumentError, "At least one class must be specified" unless class_names && class_names.split(',').any?
 
+      event_options = options.extract!(:guards)
+
       class_names.split(',').each do |class_name|
         klass = class_name.constantize
 
@@ -19,7 +21,7 @@ module Transitions
         end
 
         klass.get_state_machine.events.values.each do |event|
-          event.draw(graph)
+          event.draw(graph, event_options)
         end
         graph.output
       end
@@ -29,7 +31,7 @@ module Transitions
   Transitions::State.class_eval do
 
     def draw(graph)
-      node = graph.add_nodes(self.name.to_s.humanize, shape: final? ? "doublecircle" : "ellipse")
+      node = graph.add_nodes(self.name.to_s.humanize, shape: final? ? "doublecircle" : "box")
       graph.add_edge(graph.add_nodes("starting_state", shape: "point"), node) if initial?
     end
 
@@ -49,9 +51,19 @@ module Transitions
   end
 
   Transitions::Event.class_eval do
-    def draw(graph)
+    def draw(graph, options)
       @transitions.each do |transition|
-        graph.add_edge(transition.from.to_s.humanize, transition.to.to_s.humanize, label: " #{name.to_s.humanize} ")
+        label= "<<FONT> #{name.to_s.humanize} </FONT>"
+
+        if options.key?(:guards) and transition.instance_variable_get('@guard').present?
+          label << "<br/><br/>"
+          label = [transition.instance_variable_get('@guard')].flatten.inject("#{label}") do |memo, guard|
+            memo <<  "<FONT POINT-SIZE=\"10\"> :#{guard} </FONT><BR/>"
+          end
+        end
+        label << ">"
+
+        graph.add_edge(transition.from.to_s.humanize, transition.to.to_s.humanize, label: label)
       end
     end
   end

@@ -28,6 +28,9 @@ To save files to a specific path:
 
     $ rake transitions:draw CLASS=Vehicle,Vehicle::Color TARGET=./tmp
 
+If you only use symbolized method names in your event guards and you want to display them : 
+
+    $ rake transitions:draw CLASS=Vehicle GUARDS=true
 
 ## Contributing
 
